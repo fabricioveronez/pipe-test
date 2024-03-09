@@ -4,11 +4,19 @@ on:
   workflow_dispatch:
 
 jobs:
-  teste:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Teste
         run: echo "Teste"
     
-        
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment: 
+      name: homolog
+    steps:
+      - name: Deploy
+        run: echo ${{ vars.ENV_VAR }}
+
     
