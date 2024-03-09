@@ -1,0 +1,12 @@
+name: TestePipe
+run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+on:
+  worworkflow_dispatch:
+
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Teste
+        run: echo "Teste"
+    
