@@ -23,6 +23,7 @@ jobs:
           import os
           import random
           from github import Github
+          from github.GithubObject import GithubObject
           
           # Gerar um número aleatório
           random_number = random.randint(1, 100)
@@ -44,10 +45,17 @@ jobs:
           repo = g.get_repo(repo_name)
           run = repo.get_workflow_run(int(run_id))
           
+          # Criar um objeto de output
+          output = GithubObject()
+          
+          # Adicionar o número aleatório ao objeto de output
+          output.value = str(random_number)
+          
           # Atualizar o output da ação com o número aleatório gerado
-          run.add_to_output("ACTION_RANDOM_PYTHON", random_number)
+          run.create_check_run_output("ACTION_RANDOM_PYTHON", output)
           
           print("Número aleatório gerado e adicionado ao output da action com sucesso!")
+
       - name: Exibindo o output da action exemplo-output-shell
         run: |
           echo "output de exemplo-output-shell = ${{ steps.exemplo-output-shell.outputs.ACTION_RANDOM_SHELL }}"
