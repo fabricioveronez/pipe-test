@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Exibição dos outputs do job gerando-output
         run: | 
-          echo "Output Shell = ${{ needs.gerando-output.outputs.output-shell }}
-          echo "Output Password = ${{ needs.gerando-output.outputs.output-generatedpassword }}
+          echo "Output Shell = ${{ needs.gerando-output.outputs.output-shell }}"
+          echo "Output Password = ${{ needs.gerando-output.outputs.output-generatedpassword }}"
 
 
