@@ -14,7 +14,7 @@ jobs:
           
       - name: Adicionando o pacote do githup python
         run: | 
-          pip install github
+          pip install PyGithub
           
       - name: Gerando output com python
         id: exemplo-output-python
