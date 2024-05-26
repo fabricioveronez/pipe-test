@@ -20,5 +20,7 @@ jobs:
         uses: aammirmirza/RandomPasswordGenerator@v1.1
         with:
           length: 15
-      - run: echo "${{ steps.generatedpassword.outputs.password }}"
+          
+      - name: Exibindo o output da action de password
+        run: echo "${{ steps.generatedpassword.outputs.password }}"
         shell: bash
