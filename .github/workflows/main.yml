@@ -34,6 +34,7 @@ jobs:
         
   download-artifact:
     runs-on: ubuntu-latest
+    needs: [upload-artifact]
     steps:
       - name: Listar os arquivos nesse momento
         run: ls
