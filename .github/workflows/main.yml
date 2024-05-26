@@ -22,6 +22,7 @@ jobs:
           length: 15
   exibindo-valores:
     runs-on: ubuntu-latest
+    needs: [gerando-output]
     steps:
       - name: Exibição dos outputs do job gerando-output
         run: | 
