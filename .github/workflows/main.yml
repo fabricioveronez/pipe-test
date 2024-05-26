@@ -1,48 +1,12 @@
 name: Exemplo Output
 run-name: Executando workflow para output por ${{ github.actor }}
 on:
-  workflow_dispatch:
-env:
-  nome-artefato: teste-artefato
+  repository_dispatch: 
+    types:
+      - dependency_updated
 jobs:
-  upload-artifact:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Listar os arquivos nesse momento
-        run: ls
-      - name: Gerar alguns arquivos 
-        run: |
-          mkdir artefatos
-          echo "Arquivo de Teste 01" > ./artefatos/primeiro_arquivo.txt
-          echo "Arquivo de Teste 02" > ./artefatos/segundo_arquivo.txt
-          echo "Arquivo de Teste 03" > ./artefatos/terceiro_arquivo.txt
-          echo "Arquivo de Teste 04" > ./artefatos/quarto_arquivo.txt
-
-      - name: Envio dos arquivos
-        uses: actions/upload-artifact@v4
-        id: upload-artifact
-        with:
-          name: ${{ env.nome-artefato }}
-          path: ./artefatos/
-      
-      - name: Resultado de arquivos
-        run: ls
-
-      - name: Endereço para obter os artefatos
-        run: |
-          echo "${{ steps.upload-artifact.outputs.artifact-url }}"
-        
-  download-artifact:
-    runs-on: ubuntu-latest
-    needs: [upload-artifact]
-    steps:
-      - name: Listar os arquivos nesse momento
-        run: ls
-
-      - name: Download do artefato
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ env.nome-artefato }}
-
-      - name: Resultado de arquivos
-        run: ls
+        run: echo "Disparou o evento"
