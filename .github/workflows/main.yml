@@ -7,9 +7,40 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Gerando output com shell
-        id: exemplo-output-01
+        id: exemplo-output-shell
         run: | 
-          ACTION_RANDOM=$(( $RANDOM ))
-          echo "ACTION_RANDOM=$ACTION_RANDOM" >> $GITHUB_OUTPUT
-      - name: Exibindo o output da action exemplo-output-01
-        run: echo "${{ steps.exemplo-output-01.outputs.ACTION_RANDOM }}"
+          ACTION_RANDOM_SHELL=$(( $RANDOM ))
+          echo "ACTION_RANDOM=$ACTION_RANDOM_SHELL" >> $GITHUB_OUTPUT
+
+      - name: Gerando output com python
+        id: exemplo-output-python
+        shell: python
+        run: | 
+          import os
+          import random
+
+          # Gerar um número aleatório
+          random_number = random.randint(1, 100)
+          
+          # Armazenar o número aleatório em uma variável de ambiente
+          os.environ["ACTION_RANDOM_PYTHON"] = str(random_number)
+          
+          # Recuperar o valor da variável de ambiente GITHUB_OUTPUT, se existir
+          github_output = os.getenv("GITHUB_OUTPUT", "")
+          
+          # Adicionar o valor aleatório à variável de ambiente GITHUB_OUTPUT
+          if github_output:
+              github_output += f"\nACTION_RANDOM_PYTHON={random_number}"
+          else:
+              github_output = f"ACTION_RANDOM_PYTHON={random_number}"
+          
+          # Atualizar a variável de ambiente GITHUB_OUTPUT
+          os.environ["GITHUB_OUTPUT"] = github_output
+          
+          print("Número aleatório gerado e armazenado com sucesso!")
+        
+      
+      - name: Exibindo o output da action exemplo-output-shell
+        run: |
+          echo "output de exemplo-output-shell = ${{ steps.exemplo-output-shell.outputs.ACTION_RANDOM_SHELL }}"
+          echo "output de exemplo-output-python = ${{ steps.exemplo-output-python.outputs.ACTION_RANDOM_PYTHON }}"
