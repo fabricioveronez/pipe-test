@@ -7,57 +7,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Gerando output com shell
-        id: exemplo-output-shell
+        id: exemplo-output-01
         run: | 
-          ACTION_RANDOM_SHELL=$(( $RANDOM ))
-          echo "ACTION_RANDOM=$ACTION_RANDOM_SHELL" >> $GITHUB_OUTPUT
-          
-      - name: Adicionando o pacote do githup python
-        run: | 
-          pip install PyGithub
-          
-      - name: Gerando output com python
-        id: exemplo-output-python
-        shell: python
-        run: | 
-          import os
-          import random
-          from github import Github
-          
-          # Gerar um número aleatório
-          random_number = random.randint(1, 100)
-          
-          # Armazenar o número aleatório em uma variável de ambiente
-          os.environ["ACTION_RANDOM_PYTHON"] = str(random_number)
-          
-          # Obter o token de acesso do GitHub da variável de ambiente
-          github_token = os.getenv("GITHUB_TOKEN")
-          
-          # Criar uma instância da classe Github usando o token de acesso
-          g = Github(github_token)
-          
-          # Obter o contexto da execução atual da ação
-          repo_name = os.getenv("GITHUB_REPOSITORY")
-          run_id = os.getenv("GITHUB_RUN_ID")
-          
-          # Obter a execução atual da ação
-          repo = g.get_repo(repo_name)
-          run = repo.get_workflow_run(int(run_id))
-          
-          # Criar um objeto de output
-          output = {
-              "title": "ACTION_RANDOM_PYTHON",
-              "summary": "Número aleatório gerado pela ação Python",
-              "text": str(random_number)
-          }
-          
-          # Atualizar o output da ação com o número aleatório gerado
-          run.create_check_run_output("ACTION_RANDOM_PYTHON", output)
-          
-          print("Número aleatório gerado e adicionado ao output da action com sucesso!")
-
-
-      - name: Exibindo o output da action exemplo-output-shell
-        run: |
-          echo "output de exemplo-output-shell = ${{ steps.exemplo-output-shell.outputs.ACTION_RANDOM_SHELL }}"
-          echo "output de exemplo-output-python = ${{ steps.exemplo-output-python.outputs.ACTION_RANDOM_PYTHON }}"
+          ACTION_RANDOM=$(( $RANDOM ))
+          echo "ACTION_RANDOM=$ACTION_RANDOM" >> $GITHUB_OUTPUT
+      
+      - name: Exibindo o output da action exemplo-output-01
+        run: echo "${{ steps.exemplo-output-01.outputs.ACTION_RANDOM }}"
