@@ -12,4 +12,4 @@ jobs:
           ACTION_RANDOM=$(( $RANDOM ))
           echo "ACTION_RANDOM=$ACTION_RANDOM" >> $GITHUB_OUTPUT
       - name: Exibindo o output da action exemplo-output-01
-        run: echo "${{ toJson(steps.exemplo-output-01.outputs.ACTION_RANDOM) }}"
+        run: echo "${{ steps.exemplo-output-01.outputs.ACTION_RANDOM }}"
