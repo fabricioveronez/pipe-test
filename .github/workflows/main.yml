@@ -1,39 +1,15 @@
-name: Exemplo Input
-run-name: Executando workflow para input por ${{ github.actor }}
+name: Exemplo Output
+run-name: Executando workflow para output por ${{ github.actor }}
 on:
   workflow_dispatch:
-    inputs:
-      versao:
-        type: string
-        required: true
-        default: "devx"
-        description: Versão da nova release
-      numero_card:
-        type: number
-        required: true
-        description: Número do card de tarefa desse commit
-      fazer_deploy:
-        type: boolean
-        required: true
-        description: Especifica se deve ou não fazer deploy no ambiente
-      ambiente:
-        type: choice
-        required: true
-        description: Ambiente de entrega
-        options:
-          - Desenvolvimento
-          - Homologação
-          - Produção
 jobs:
-  valores_input:
+  gerando_output:
     runs-on: ubuntu-latest
     steps:
-      - name: Exibindo o contexto completo
-        run: echo "${{ toJson(inputs) }}"
-      - name: Exibição dos valores
-        run: |
-          echo "Esses são os valores passados no input"
-          echo "A versão é: ${{ inputs.versao }}"
-          echo "Deve fazer deploy: ${{ inputs.fazer_deploy }}"
-          echo "O card é: ${{ inputs.numero_card }}"
-          echo "O ambiente é: ${{ inputs.ambiente }}"
+      - name: Gerando output com shell
+        id: exemplo-output-01
+        run: | 
+          ACTION_RANDOM=$(( $RANDOM ))
+          echo $ACTION_RANDOM >> $GITHUB_OUTPUT
+      - name: Exibindo o output da action exemplo-output-01
+        run: echo "${{ toJson(steps.exemplo-output-01.outputs.ACTION_RANDOM) }}"
