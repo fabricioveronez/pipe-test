@@ -11,7 +11,11 @@ jobs:
         run: | 
           ACTION_RANDOM_SHELL=$(( $RANDOM ))
           echo "ACTION_RANDOM=$ACTION_RANDOM_SHELL" >> $GITHUB_OUTPUT
-
+          
+      - name: Adicionando o pacote do githup python
+        run: | 
+          pip install github
+          
       - name: Gerando output com python
         id: exemplo-output-python
         shell: python
