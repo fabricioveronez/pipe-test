@@ -1,5 +1,4 @@
-name: Exemplo Output
-run-name: Executando workflow para output por ${{ github.actor }}
+name: Disparar deploy
 on:
   repository_dispatch: 
     types:
