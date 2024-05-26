@@ -22,7 +22,7 @@ jobs:
         run: | 
           import os
           import random
-          from github import Github
+          from github import Github, GithubAction
           
           # Gerar um número aleatório
           random_number = random.randint(1, 100)
@@ -30,20 +30,26 @@ jobs:
           # Armazenar o número aleatório em uma variável de ambiente
           os.environ["ACTION_RANDOM_PYTHON"] = str(random_number)
           
-          # Configurar a instância da classe Github com o token de acesso
-          g = Github(os.getenv("GITHUB_TOKEN"))
+          # Obter o token de acesso do GitHub da variável de ambiente
+          github_token = os.getenv("GITHUB_TOKEN")
+          
+          # Criar uma instância da classe Github usando o token de acesso
+          g = Github(github_token)
           
           # Obter o contexto da execução atual da ação
-          repo = os.getenv("GITHUB_REPOSITORY")
+          repo_name = os.getenv("GITHUB_REPOSITORY")
           run_id = os.getenv("GITHUB_RUN_ID")
           
           # Obter a execução atual da ação
-          run = g.get_repo(repo).get_workflow_run(int(run_id))
+          repo = g.get_repo(repo_name)
+          run = repo.get_workflow_run(int(run_id))
           
           # Atualizar o output da ação com o número aleatório gerado
-          run.add_to_output("ACTION_RANDOM_PYTHON", random_number)
+          action_output = GithubAction(github_token)
+          action_output.create(run, {"ACTION_RANDOM_PYTHON": random_number})
           
           print("Número aleatório gerado e adicionado ao output da action com sucesso!")
+
       
       - name: Exibindo o output da action exemplo-output-shell
         run: |
