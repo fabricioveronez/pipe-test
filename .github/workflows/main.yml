@@ -1,32 +1,42 @@
-name: TestePipe
-run-name: Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}
+name: Exemplo Input
+run-name: Executando workflow para input por ${{ github.actor }}
 on:
   workflow_dispatch:
     inputs:
-      deploy_target:
-        type: string
-        required: false
-        default: "Local"
-        description: Local que é executado o workflow
-      ambiente:
+      versao:
         type: string
         required: true
+        default: "devx"
+        description: Versão da nova release
+      numero_card:
+        type: number
+        required: true
+        description: Número do card de tarefa desse commit
+      fazer_deploy:
+        type: boolean
+        required: true
+        description: Especifica se deve ou não fazer deploy no ambiente
+      ambiente:
+        type: choice
+        required: true
         description: Ambiente de entrega
-
+        options:
+          - Desenvolvimento
+          - Homologação
+          - Produção
 jobs:
-  build:
+  valores_input:
     runs-on: ubuntu-latest
     steps:
-      - name: Teste
-        run: echo "Teste"
+      - name: Exibição dos valores
+        run: |
+          echo "Esses são os valores passados no input"
+          echo "A versão é: ${{ inputs.versao }}"
+          echo "Deve fazer deploy: ${{ inputs.fazer_deploy }}"
+          echo "O card é: ${{ inputs.numero_card }}"
+          echo "O ambiente é: ${{ inputs.ambiente }}"
+
     
-  deploy:
-    needs: [build]
-    runs-on: ubuntu-latest
-    environment: 
-      name: ${{inputs.ambiente}}
-    steps:
-      - name: Deploy
-        run: echo ${{ vars.ENV_VAR }}
+
 
     
