@@ -1,19 +1,12 @@
 name: Workflow Evento
 on:
-  pull_request:
-    branches:
-      - main
+  push: 
+    branches: ["main", "feature/*"]
+    paths: 
+      - ./src
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Action de teste
-        uses: actions/github-script@v6
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'Adicionando um comentário aqui sobre o PR'
-            })
+        run: echo "Actions executada hotfix"
