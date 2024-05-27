@@ -7,6 +7,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Adicionando funcionalidade
+        run: echo "Teste de action"
       - name: Action de teste
         uses: actions/github-script@v6
         with:
