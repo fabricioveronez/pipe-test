@@ -22,5 +22,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Operação com Expression
+      - name: Operação com string
         run: echo "${{ github.actor == inputs.valor_string }}"
+      - name: Operação com number
+        run: echo "${{ inputs.valor_numerico > 20 }}"
+      - name: Operação com boolean
+        run: echo "${{ !inputs.valor_booleano }}"
