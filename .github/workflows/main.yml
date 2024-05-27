@@ -1,4 +1,4 @@
-name: Workflow disparado por 
+name: Workflow disparado 
 run-name: "Workflow disparado por ${{ github.actor }}"
 on:
   workflow_dispatch: 
