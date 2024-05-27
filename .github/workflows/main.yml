@@ -1,8 +1,6 @@
 name: Disparar deploy
 on:
-  repository_dispatch: 
-    types:
-      - dependency_updated
+  workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
