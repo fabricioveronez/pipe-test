@@ -22,9 +22,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Operação com string
-        run: echo "${{ github.actor == inputs.valor_string }}"
-      - name: Operação com number
-        run: echo "${{ inputs.valor_numerico > 20 }}"
-      - name: Operação com boolean
-        run: echo "${{ !inputs.valor_booleano }}"
+      - name: Função contains
+        run: echo "${{ contains(github.actor, inputs.valor_string) }}"
+      - name: Função format
+        run: "echo ${{ format('String Format: {0} - Number Format: {1} - Boolean Format: {2}', inputs.valor_string, inputs.valor_numerico, inputs.valor_booleano) }}"
+      - name: Função toJSON
+        run: echo "${{ toJson(github) }}"
