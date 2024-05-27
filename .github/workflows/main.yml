@@ -1,11 +1,19 @@
 name: Workflow Evento
 on:
-  push: 
-    tags: 
-     - v*
+  pull_request:
+    branches:
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Action de teste
-        run: echo "Actions executada tag"
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Adicionando um comentário aqui sobre o PR'
+            })
