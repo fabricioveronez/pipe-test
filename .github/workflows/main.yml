@@ -4,12 +4,19 @@ on:
   push:
     
 jobs:
-  exemplo-fluxo-execucao:
-    name: 
+  exemplo-fluxo-execucao-01:
     runs-on: ubuntu-latest
     steps:
       - name: Vai falhar
         run: l
       - name: Tratativa de Fluxo
-        if: ${{ failure()}}
         run: echo "Execução de Fluxo"
+  exemplo-fluxo-execucao-02:
+    needs: [exemplo-fluxo-execucao-01]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Vai falhar
+        run: l
+      - name: Tratativa de Fluxo
+        run: echo "Execução de Fluxo"
+      
