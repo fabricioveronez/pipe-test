@@ -16,8 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ failure() }}
     steps:
-      - name: Vai falhar
-        run: l
-      - name: Tratativa de Fluxo
+      - name: Executando com sucesso
         run: echo "Execução de Fluxo"
       
