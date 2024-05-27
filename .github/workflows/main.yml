@@ -1,21 +1,22 @@
 name: Workflow disparado 
 run-name: "Workflow disparado por ${{ github.actor }}"
 on:
-  push:
-    
+  workflow_dispatch: 
 jobs:
   exemplo-fluxo-execucao-01:
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        versao: [ 16, 18, 20 ]
+        plataforma: ["windows", "ubuntu"]
+    runs-on: "${{ matrix.plataforma }}-latest"
     steps:
-      - name: Vai falhar
-        run: l
-      - name: Tratativa de Fluxo
-        run: echo "Execução de Fluxo"
-  exemplo-fluxo-execucao-02:
-    needs: [exemplo-fluxo-execucao-01]
-    runs-on: ubuntu-latest
-    if: ${{ failure() }}
-    steps:
-      - name: Executando com sucesso
-        run: echo "Execução de Fluxo"
+      - name: Instalação da versão
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.versao }}
+      - name: Exibindo a Versão e Plataforma
+        run: |
+          node --version
+          echo "${{ runner.os }}"
+
       
