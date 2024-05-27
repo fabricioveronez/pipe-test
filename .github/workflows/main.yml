@@ -11,5 +11,4 @@ jobs:
       - name: Vai falhar
         run: l
       - name: Tratativa de Fluxo
-        if: ${{ failure()}}
         run: echo "Execução de Fluxo"
