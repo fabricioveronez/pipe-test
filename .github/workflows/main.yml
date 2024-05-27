@@ -1,12 +1,10 @@
 name: Workflow Evento
 on:
-  push: 
-    branches: ["main", "feature/*"]
-    paths: 
-      - src/**
+  schedule:
+    - cron: "*/2 * * * *"
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Action de teste
-        run: echo "Actions executada hotfix"
+        run: echo "Actions executada"
