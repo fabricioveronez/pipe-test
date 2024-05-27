@@ -1,10 +1,11 @@
 name: Workflow Evento
 on:
   push: 
-    branches: ["main", "feature/*"]
+    tags: 
+     - v*
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Action de teste
-        run: echo "Actions executada hotfix"
+        run: echo "Actions executada tag"
