@@ -3,6 +3,7 @@ on:
   pull_request:
     branches:
       - main
+    types: closed
 jobs:
   deploy:
     permissions: write-all
