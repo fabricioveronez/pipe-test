@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Função contains
-        run: echo "${{ contains(github.actor, inputs.valor_string) }}"
+        run: echo "${{ contains(inputs.valor_string, github.actor) }}"
       - name: Função format
         run: "echo ${{ format('String Format: {0} - Number Format: {1} - Boolean Format: {2}', inputs.valor_string, inputs.valor_numerico, inputs.valor_booleano) }}"
       - name: Função toJSON
