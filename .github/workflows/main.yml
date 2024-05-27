@@ -6,6 +6,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions: 
+      issues: write
     steps:
       - name: Adicionando funcionalidade
         run: echo "Teste de action"
