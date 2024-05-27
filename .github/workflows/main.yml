@@ -1,30 +1,22 @@
 name: Workflow disparado 
 run-name: "Workflow disparado por ${{ github.actor }}"
 on:
-  workflow_dispatch: 
-    inputs:
-      valor_numerico:
-        description: 'Valor numérico'
-        type: number
-        required: true
-        default: 20
-      valor_string:
-        description: 'Valor string'
-        required: true
-        type: string
-        default: 'Exemplo XPTO'
-      valor_booleano:
-        description: 'Valor booleano'
-        type: boolean
-        required: true
-        default: true
+  push:
+    
 jobs:
-  deploy:
+  apenas-main:
+    name: Esse job só executa na branch main
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Função contains
-        run: echo "${{ contains(inputs.valor_string, github.actor) }}"
-      - name: Função format
-        run: "echo ${{ format('String Format: {0} - Number Format: {1} - Boolean Format: {2}', inputs.valor_string, inputs.valor_numerico, inputs.valor_booleano) }}"
-      - name: Função toJSON
-        run: echo "${{ toJson(github) }}"
+      - name: Execução na main
+        run: echo "Executando comando na branch main"
+  todos:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Execução em feature
+      if: ${{ contains(github.ref, 'refs/heads/feature') }}
+      run: echo "Executando comando feature"
+    - name: Execução em hotfix
+      if: ${{ contains(github.ref, 'refs/heads/hotfix') }}
+      run: echo "Executando comando hotfix"
