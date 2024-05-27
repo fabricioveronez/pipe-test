@@ -7,4 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Action de teste
-        run: echo "Actions executada"
+        run: echo "Actions executada main"
