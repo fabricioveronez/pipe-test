@@ -1,10 +1,26 @@
-name: Workflow Evento
+name: Workflow disparado por 
+run-name: "Workflow disparado por ${{ github.actor }}"
 on:
-  schedule:
-    - cron: "*/2 * * * *"
+  workflow_dispatch: 
+    inputs:
+      valor_numerico:
+        description: 'Valor numérico'
+        type: number
+        required: true
+        default: 20
+      valor_string:
+        description: 'Valor string'
+        required: true
+        type: string
+        default: 'Exemplo XPTO'
+      valor_booleano:
+        description: 'Valor booleano'
+        type: boolean
+        required: true
+        default: true
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Action de teste
-        run: echo "Actions executada"
+      - name: Operação com Expression
+        run: echo "${{ github.actor == inputs.valor_string }}"
