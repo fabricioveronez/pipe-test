@@ -1,9 +1,9 @@
-name: Disparar deploy
+name: Workflow Evento
 on:
   workflow_dispatch:
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Listar os arquivos nesse momento
+      - name: Action de teste
         run: echo "Disparou o evento"
