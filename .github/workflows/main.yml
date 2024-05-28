@@ -1,22 +1,21 @@
 name: Workflow disparado 
 run-name: "Workflow disparado por ${{ github.actor }}"
 on:
-  push:
-    
+  workflow_dispatch: 
 jobs:
-  apenas-main:
-    name: Esse job só executa na branch main
-    if: ${{ github.ref == 'refs/heads/main' }}
+  exemplo-fluxo-execucao-01:
+    concurrency: pipeline-aula
     runs-on: ubuntu-latest
     steps:
-      - name: Execução na main
-        run: echo "Executando comando na branch main"
-  todos:
+      - name: Execução do job de teste
+        run: |
+          sleep 120;
+          echo "Action executada job 01"
+  exemplo-fluxo-execucao-02:
     runs-on: ubuntu-latest
     steps:
-    - name: Execução em feature
-      if: ${{ contains(github.ref, 'refs/heads/feature') }}
-      run: echo "Executando comando feature"
-    - name: Execução em hotfix
-      if: ${{ contains(github.ref, 'refs/heads/hotfix') }}
-      run: echo "Executando comando hotfix"
+      - name: Execução do job de teste
+        run: |
+          sleep 120;
+          echo "Action executada job 02"
+        
