@@ -1,5 +1,5 @@
 name: Workflow disparado 
-run-name: "Workflow disparado por ${{ github.actor }}"
+run-name: "Workflow disparado por ${{ github.run_number }}"
 on:
   workflow_dispatch: 
 jobs:
