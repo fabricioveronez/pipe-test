@@ -2,22 +2,15 @@ name: Workflow disparado
 run-name: "Workflow disparado por ${{ github.run_number }}"
 on:
   workflow_dispatch: 
+  push: 
+concurrency: 
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
 jobs:
   exemplo-fluxo-execucao-01:
-    concurrency: 
-      group: pipeline-aula
-      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
       - name: Execução do job de teste
         run: |
           sleep 120;
           echo "Action executada job 01"
-  exemplo-fluxo-execucao-02:
-    runs-on: ubuntu-latest
-    needs: [exemplo-fluxo-execucao-01]
-    steps:
-      - name: Execução do job de teste
-        run: |
-          sleep 120;
-          echo "Action executada job 02"
