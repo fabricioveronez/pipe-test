@@ -2,11 +2,12 @@ name: Workflow disparado
 run-name: "Workflow disparado por ${{ github.actor }}"
 on:
   workflow_dispatch: 
+concurrency: pipeline-aula
 jobs:
   exemplo-fluxo-execucao-01:
     runs-on: ubuntu-latest
     steps:
       - name: Instalação da versão
         run: |
-          sleep 60;
+          sleep 120;
           echo "Action executada"
