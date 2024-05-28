@@ -4,7 +4,9 @@ on:
   workflow_dispatch: 
 jobs:
   exemplo-fluxo-execucao-01:
-    concurrency: pipeline-aula
+    concurrency: 
+      group: pipeline-aula
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
       - name: Execução do job de teste
@@ -13,6 +15,7 @@ jobs:
           echo "Action executada job 01"
   exemplo-fluxo-execucao-02:
     runs-on: ubuntu-latest
+    needs: [exemplo-fluxo-execucao-01]
     steps:
       - name: Execução do job de teste
         run: |
