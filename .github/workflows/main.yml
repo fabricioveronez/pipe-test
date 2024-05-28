@@ -4,19 +4,9 @@ on:
   workflow_dispatch: 
 jobs:
   exemplo-fluxo-execucao-01:
-    strategy:
-      matrix:
-        versao: [ 16, 18, 20 ]
-        plataforma: ["windows", "ubuntu"]
-    runs-on: "${{ matrix.plataforma }}-latest"
+    runs-on: ubuntu-latest
     steps:
       - name: Instalação da versão
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.versao }}
-      - name: Exibindo a Versão e Plataforma
         run: |
-          node --version
-          echo "${{ runner.os }}"
-
-      
+          sleep 60;
+          echo "Action executada"
