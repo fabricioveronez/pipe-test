@@ -1,17 +1,12 @@
-name: Workflow disparado 
-run-name: "Workflow disparado por ${{ github.run_number }}"
+name: Workflow Environment
+run-name: "Workflow Environment número ${{ github.run_number }}"
 on:
   workflow_dispatch: 
-  push: 
-concurrency: 
-  group: ${{ github.ref }}-${{ github.workflow }}
-  cancel-in-progress: true
 jobs:
-  exemplo-fluxo-execucao-01:
+  deploy-ambiente:
     runs-on: ubuntu-latest
+    environment: Produção
     steps:
-      - name: Execução do job de teste
+      - name: Execução do job em ambiente
         run: |
-          sleep 120;
-          echo "Action executada job 01"
-# tesste
+          echo "Job executado no ambiente ${{ job.deploy-ambiente.environment }}"
