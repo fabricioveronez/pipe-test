@@ -3,10 +3,10 @@ run-name: "Workflow Environment número ${{ github.run_number }}"
 on:
   workflow_dispatch: 
 jobs:
-  deploy-ambiente:
+  deploy_ambiente:
     runs-on: ubuntu-latest
     environment: producao
     steps:
       - name: Execução do job em ambiente
         run: |
-          echo "Job executado no ambiente ${{ job.deploy-ambiente.environment }}"
+          echo "Job executado no ambiente ${{ toJson(job.deploy_ambiente) }}"
