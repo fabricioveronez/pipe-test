@@ -5,7 +5,7 @@ on:
 jobs:
   deploy-ambiente:
     runs-on: ubuntu-latest
-    environment: Produção
+    environment: producao
     steps:
       - name: Execução do job em ambiente
         run: |
