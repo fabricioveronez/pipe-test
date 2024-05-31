@@ -9,4 +9,4 @@ jobs:
     steps:
       - name: Execução do job em ambiente
         run: |
-          echo "Job executado no ambiente ${{ vars.MSG_AMBIENTE }}"
+          echo "${{ vars.MSG_AMBIENTE }}"
