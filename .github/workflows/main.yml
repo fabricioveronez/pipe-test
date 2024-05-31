@@ -9,4 +9,4 @@ jobs:
     steps:
       - name: Execução do job em ambiente
         run: |
-          echo "Job executado no ambiente ${{ toJson(job.deploy_ambiente) }}"
+          echo "Job executado no ambiente ${{ toJson(needs.deploy_ambiente.environment) }}"
